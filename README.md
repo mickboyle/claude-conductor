@@ -14,12 +14,34 @@ Claude Conductor is a plugin for Claude Code that brings the structured developm
 
 ## Installation
 
+### Prerequisites
+
+- [Claude Code](https://claude.com/claude-code) CLI installed and configured
+- Git installed (for track branching and rollback features)
+
+### Install
+
 ```bash
 # Clone the plugin
 git clone https://github.com/your-username/claude-conductor.git
 
 # Install in Claude Code
 claude /plugin install ./claude-conductor
+```
+
+### Verify Installation
+
+```bash
+# Check that Conductor is available
+claude /conductor:status
+```
+
+You should see "Conductor not initialized" if the plugin is installed correctly.
+
+### Uninstall
+
+```bash
+claude /plugin uninstall claude-conductor
 ```
 
 ## Quick Start
@@ -164,7 +186,10 @@ Phase boundaries have **checkpoints** - explicit verification points where you c
    - Validates against all guidelines
    - Reports issues to fix
 
-9. Track complete, ready for PR
+9. If issues found, fix and re-review
+   - Or use /conductor:revert --task 3.2 to undo a task
+
+10. Track complete, ready for PR
 ```
 
 ## Integration with CLAUDE.md
@@ -241,6 +266,58 @@ Edit generated files in `conductor/`:
 | Git Integration | Branch per track | Branch per track |
 | Phase Checkpoints | Yes | Yes |
 | Brownfield Support | Yes | Yes |
+
+## Troubleshooting
+
+### "Conductor not initialized"
+
+**Problem:** Running commands shows "Conductor not initialized for this project."
+
+**Solution:** Run `/conductor:setup` in your project directory to initialize Conductor.
+
+### "No active track"
+
+**Problem:** `/conductor:implement` says there's no active track.
+
+**Solution:** Either:
+- Create a new track: `/conductor:newTrack "Feature description"`
+- Check existing tracks: `/conductor:status --all`
+
+### Plugin Not Found
+
+**Problem:** Commands like `/conductor:setup` aren't recognized.
+
+**Solution:**
+1. Verify installation: `claude /plugin list`
+2. Reinstall if needed: `claude /plugin install ./claude-conductor`
+3. Ensure you're in a directory where Claude Code can access the plugin
+
+### Git Errors During Track Creation
+
+**Problem:** Track creation fails with git errors.
+
+**Solution:**
+- Ensure git is initialized: `git init`
+- Commit or stash uncommitted changes before creating a track
+- Check you have permission to create branches
+
+### Corrupted Track State
+
+**Problem:** Track metadata seems out of sync with actual progress.
+
+**Solution:**
+1. Run `/conductor:status` to see current state
+2. If corrupted, the status command offers repair options
+3. As a last resort, manually edit `metadata.json` in the track directory
+
+### Checkpoint Verification Failed
+
+**Problem:** Phase checkpoint fails even though work is complete.
+
+**Solution:**
+- Review the checkpoint criteria in `plan.md`
+- Ensure all subtasks are marked `[x]` complete
+- If legitimately complete, choose "Checkpoint passed" to continue
 
 ## Contributing
 

@@ -72,11 +72,11 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 
 #### Task 2.1: Update README.md
 
-- [ ] Add/improve installation instructions if needed
-- [ ] Ensure all commands have clear examples
-- [ ] Add troubleshooting section if missing
-- [ ] Add "How It Works" section if needed
-- [ ] Verify all links work
+- [x] Add/improve installation instructions if needed
+- [x] Ensure all commands have clear examples
+- [x] Add troubleshooting section if missing
+- [x] Add "How It Works" section if needed
+- [x] Verify all links work
 
 **Files:** `README.md`
 
@@ -197,7 +197,7 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 | Phase | Tasks | Completed | Status |
 |-------|-------|-----------|--------|
 | 1. Audit | 5 | 5 | ✓ complete |
-| 2. README/Index | 2 | 0 | pending |
+| 2. README/Index | 2 | 0 | → in progress |
 | 3. Commands | 4 | 0 | pending |
 | 4. Agents/Skill | 2 | 0 | pending |
 | 5. Templates | 1 | 0 | pending |
