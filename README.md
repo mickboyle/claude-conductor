@@ -53,7 +53,9 @@ Select **"Install for you (user scope)"** for global availability across all pro
 /conductor:status
 ```
 
-You should see "No Conductor setup detected" or similar - this confirms the plugin is working.
+**If installed correctly:** You'll see a message about Conductor not being initialized for this project. That's expected - run `/conductor:setup` to initialize.
+
+**If you see "Unknown skill":** The plugin isn't installed. Revisit steps 2-3.
 
 ### Alternative: Development Mode
 
