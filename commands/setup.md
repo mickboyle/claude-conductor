@@ -2,6 +2,13 @@
 
 Initialize Claude Conductor for this project with an interactive setup wizard.
 
+## Usage
+
+```
+/conductor:setup              # Run interactive setup wizard
+/conductor:setup --reset      # Reset existing setup and start over
+```
+
 ## Overview
 
 This command creates the `conductor/` directory with all configuration files needed for structured development. It supports both greenfield (new) and brownfield (existing) projects.
@@ -235,32 +242,90 @@ Resume from where you left off? (y/n)
 
 ## Generated File Content
 
+Setup creates 7 files in the `conductor/` directory:
+
 ### conductor/index.md
 
+Navigation hub with quick links and current status.
+
+### conductor/product.md
+
+Product definition populated from your answers:
+
 ```markdown
-# Conductor Index
+# My Project
 
-## Quick Links
+## Vision
+[Your vision from Q2]
 
-- [Product Definition](./product.md)
-- [Guidelines](./product-guidelines.md)
-- [Tech Stack](./tech-stack.md)
-- [Workflow](./workflow.md)
-- [Tracks](./tracks.md)
+## Problem Statement
+[Generated based on project type]
 
-## Commands
+## Target Users
+[Derived from project type and context]
 
-- `/conductor:newTrack "description"` - Create a new feature track
-- `/conductor:implement` - Work on the active track
-- `/conductor:status` - View progress
-- `/conductor:review` - Validate against guidelines
-- `/conductor:revert` - Rollback changes
-
-## Current Status
-
-**Active Track:** None
-**Last Updated:** {{DATE}}
+## Key Features
+[Based on your answers]
 ```
+
+### conductor/product-guidelines.md
+
+Quality standards based on your design philosophy choices:
+
+```markdown
+# Product Guidelines
+
+## Design Philosophy
+[From Q9 selections: simplicity, performance, accessibility, etc.]
+
+## Quality Standards
+- Code must be production-ready
+- [Testing requirements from Q7]
+- [Quality gates from Q8]
+```
+
+### conductor/tech-stack.md
+
+Technology choices populated from detection and answers:
+
+```markdown
+# Technology Stack
+
+## Languages
+- [Primary language from Q4]
+
+## Frameworks
+- [Framework from Q5]
+
+## Database
+- [Database from Q6]
+```
+
+### conductor/workflow.md
+
+Development process based on your testing and quality choices:
+
+```markdown
+# Development Workflow
+
+## Git Workflow
+- Branch per track
+- Atomic commits per task
+
+## Testing
+[Approach from Q7: TDD, test-after, integration, manual]
+
+## Quality Gates
+[From Q8: lint, test, type-check, review]
+```
+
+### conductor/tracks.md
+
+Empty track registry, ready for your first track.
+
+### conductor/code_styleguides/
+
+Language-specific style guide based on primary language (e.g., `typescript.md`, `python.md`).
 
 ## Implementation Notes
 

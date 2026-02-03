@@ -96,10 +96,10 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 
 #### Task 3.1: Update setup.md
 
-- [ ] Ensure all Q&A questions are documented
-- [ ] Add complete example session
-- [ ] Document resume flow clearly
-- [ ] Add generated file descriptions
+- [x] Ensure all Q&A questions are documented
+- [x] Add complete example session
+- [x] Document resume flow clearly
+- [x] Add generated file descriptions
 
 **Files:** `commands/setup.md`
 
@@ -198,7 +198,7 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 |-------|-------|-----------|--------|
 | 1. Audit | 5 | 5 | ✓ complete |
 | 2. README/Index | 2 | 2 | ✓ complete |
-| 3. Commands | 4 | 0 | pending |
+| 3. Commands | 4 | 0 | → in progress |
 | 4. Agents/Skill | 2 | 0 | pending |
 | 5. Templates | 1 | 0 | pending |
 | 6. Verification | 2 | 0 | pending |
