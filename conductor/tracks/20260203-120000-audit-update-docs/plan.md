@@ -82,9 +82,9 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 
 #### Task 2.2: Update conductor/index.md
 
-- [ ] Add quick reference for common workflows
-- [ ] Ensure all links are correct
-- [ ] Add "Getting Started" quick path
+- [x] Add quick reference for common workflows
+- [x] Ensure all links are correct
+- [x] Add "Getting Started" quick path
 
 **Files:** `conductor/index.md`
 
@@ -197,7 +197,7 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 | Phase | Tasks | Completed | Status |
 |-------|-------|-----------|--------|
 | 1. Audit | 5 | 5 | ✓ complete |
-| 2. README/Index | 2 | 0 | → in progress |
+| 2. README/Index | 2 | 2 | ✓ complete |
 | 3. Commands | 4 | 0 | pending |
 | 4. Agents/Skill | 2 | 0 | pending |
 | 5. Templates | 1 | 0 | pending |
