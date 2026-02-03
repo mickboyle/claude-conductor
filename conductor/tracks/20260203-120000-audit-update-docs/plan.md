@@ -105,10 +105,10 @@ Systematically audit all 21 documentation files for completeness, identify gaps,
 
 #### Task 3.2: Update newTrack.md
 
-- [ ] Ensure spec-writer interaction is clear
-- [ ] Ensure plan-architect interaction is clear
-- [ ] Add complete example session
-- [ ] Document all options and flags
+- [x] Ensure spec-writer interaction is clear
+- [x] Ensure plan-architect interaction is clear
+- [x] Add complete example session
+- [x] Document all options and flags
 
 **Files:** `commands/newTrack.md`
 

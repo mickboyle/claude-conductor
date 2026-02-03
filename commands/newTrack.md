@@ -276,3 +276,131 @@ Users can have multiple tracks. To switch:
 - Or manually edit `conductor/.active_track`
 
 The `/conductor:status` command shows all tracks.
+
+## Complete Example Session
+
+Here's a full example of creating a track for "Add dark mode support":
+
+```
+User: /conductor:newTrack "Add dark mode support"
+
+Claude: Creating specification for: "Add dark mode support"
+
+I have a few questions to clarify the requirements:
+
+1. Should dark mode respect OS preferences?
+   a) Yes, default to OS setting (Recommended)
+   b) No, always start with light mode
+   c) Let user choose on first visit
+
+User: a
+
+2. Where should the theme toggle be located?
+   a) Settings page only
+   b) Header/navbar (Recommended)
+   c) Both settings and quick toggle in header
+
+User: c
+
+3. Should theme transitions be animated?
+   a) Yes, smooth transition
+   b) No, instant switch
+
+User: a
+
+---
+
+Claude: Here's the draft specification:
+
+# Specification: Add dark mode support
+
+**Track ID:** 20260203-143022-add-dark-mode
+**Status:** draft
+
+## Summary
+Add system-wide dark mode with OS preference detection,
+manual override via settings and header toggle, and
+smooth animated transitions.
+
+## Goals
+- Support dark and light themes
+- Respect OS prefers-color-scheme
+- Allow manual override
+- Smooth theme transitions
+
+## Non-Goals
+- Custom color themes (future track)
+- Per-page theme settings
+
+## Acceptance Criteria
+- [ ] Dark mode toggleable from settings
+- [ ] Quick toggle in header
+- [ ] Theme persists across sessions
+- [ ] Respects OS preference on first visit
+- [ ] Smooth 200ms transition
+
+---
+
+Approve this specification?
+  a) Yes, continue to planning
+  b) Request changes
+  c) Start over
+
+User: a
+
+---
+
+Claude: Creating execution plan...
+
+# Execution Plan: Add dark mode support
+
+## Overview
+Implement dark mode in 4 phases: setup theme infrastructure,
+core toggle functionality, component integration, and testing.
+
+### Phase 1: Setup & Foundation (2 tasks)
+- Task 1.1: Create theme configuration
+- Task 1.2: Create ThemeContext
+
+### Phase 2: Core Implementation (3 tasks)
+- Task 2.1: Implement theme toggle
+- Task 2.2: Add persistence
+- Task 2.3: Add OS preference detection
+
+### Phase 3: Component Integration (2 tasks)
+- Task 3.1: Update global styles
+- Task 3.2: Update components
+
+### Phase 4: Testing & Polish (2 tasks)
+- Task 4.1: Add tests
+- Task 4.2: Add transitions
+
+**Total:** 4 phases, 9 tasks
+
+---
+
+Approve this plan?
+  a) Yes, ready to implement
+  b) Adjust plan
+  c) Go back to spec
+
+User: a
+
+---
+
+Claude: Track created successfully!
+
+  Track ID: 20260203-143022-add-dark-mode
+  Branch: track/20260203-143022-add-dark-mode
+  Phases: 4
+  Tasks: 9
+
+Files created:
+  ✓ conductor/tracks/20260203-143022-add-dark-mode/spec.md
+  ✓ conductor/tracks/20260203-143022-add-dark-mode/plan.md
+  ✓ conductor/tracks/20260203-143022-add-dark-mode/metadata.json
+
+Next steps:
+  1. Review spec.md and plan.md
+  2. Run /conductor:implement to start working
+```
