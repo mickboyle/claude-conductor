@@ -110,3 +110,72 @@ If unable to detect certain aspects:
 - Mark fields as `"unknown"` rather than guessing
 - Note what additional information would be needed
 - Suggest manual configuration for unclear items
+
+## Complete Example
+
+### Input: Project Directory Structure
+
+```
+my-nextjs-app/
+├── package.json          # Next.js 14, React 18, Prisma
+├── tsconfig.json
+├── next.config.js
+├── prisma/
+│   └── schema.prisma     # PostgreSQL connection
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   └── components/
+├── __tests__/
+│   └── Home.test.tsx
+├── .eslintrc.json
+└── .prettierrc
+```
+
+### Output: Analysis JSON
+
+```json
+{
+  "projectType": "brownfield",
+  "languages": [
+    {"name": "TypeScript", "version": "5.x", "primary": true}
+  ],
+  "frameworks": [
+    {"name": "Next.js", "version": "14.x", "type": "frontend"},
+    {"name": "React", "version": "18.x", "type": "ui"},
+    {"name": "Prisma", "version": "5.x", "type": "orm"}
+  ],
+  "database": {
+    "type": "PostgreSQL",
+    "orm": "Prisma"
+  },
+  "testing": {
+    "framework": "Jest",
+    "location": "__tests__/"
+  },
+  "structure": {
+    "pattern": "app-router",
+    "sourceDir": "src/",
+    "testDir": "__tests__/"
+  },
+  "tooling": {
+    "linter": "ESLint",
+    "formatter": "Prettier",
+    "packageManager": "npm"
+  },
+  "conventions": {
+    "naming": "camelCase",
+    "imports": "absolute with @/ alias"
+  }
+}
+```
+
+### How This Output Is Used
+
+The setup command uses this analysis to:
+1. Pre-fill Q4 (Language): "TypeScript [detected]"
+2. Pre-fill Q5 (Framework): "Next.js [detected]"
+3. Pre-fill Q6 (Database): "PostgreSQL"
+4. Pre-fill testing defaults based on Jest detection
+5. Generate appropriate code style guides
