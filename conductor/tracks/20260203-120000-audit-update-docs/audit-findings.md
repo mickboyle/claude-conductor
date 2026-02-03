@@ -38,7 +38,35 @@
 
 ## Command Files
 
-**Status:** Pending
+**Status:** Audited
+**Overall:** Mostly excellent, 2 files need minor improvements
+
+### Findings
+
+| File | Rating | Issues |
+|------|--------|--------|
+| setup.md | Good | No formal Usage section; Generated File Content only shows index.md |
+| newTrack.md | Good | Could use complete end-to-end example session |
+| implement.md | Excellent | Comprehensive with ASCII flow diagram |
+| status.md | Excellent | All 4 output formats fully documented |
+| review.md | Excellent | All modes (--quick, --fix) documented |
+| revert.md | Excellent | Safety features and recovery well covered |
+
+### Gaps to Address (Phase 3)
+
+1. **[Important]** setup.md: Add formal Usage section at top
+   ```
+   ## Usage
+   /conductor:setup              # Full interactive setup
+   /conductor:setup --reset      # Reset existing setup
+   ```
+
+2. **[Important]** setup.md: Document all generated file content (not just index.md)
+   - Show snippets of product.md, tech-stack.md, etc.
+
+3. **[Nice-to-have]** newTrack.md: Add complete example session
+   - Show full spec-writer Q&A
+   - Show full plan approval flow
 
 ---
 
@@ -65,8 +93,8 @@
 | Category | Files | Audited | Gaps Found |
 |----------|-------|---------|------------|
 | README | 1 | 1 | 4 |
-| Commands | 6 | 0 | - |
+| Commands | 6 | 6 | 3 |
 | Agents | 4 | 0 | - |
 | Templates | 8 | 0 | - |
 | Skill | 1 | 0 | - |
-| **Total** | **21** | **1** | **4** |
+| **Total** | **21** | **7** | **7** |
