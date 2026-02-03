@@ -1,6 +1,6 @@
 {
   "name": "conductor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Transform ephemeral AI sessions into structured, context-driven development with persistent Markdown artifacts",
   "author": {
     "name": "Mick Boyle"
