@@ -413,5 +413,5 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
-- Inspired by [Google's Conductor extension](https://github.com/anthropics/anthropic-quickstarts) for Gemini CLI
+- Inspired by [Conductor](https://github.com/gemini-cli-extensions/conductor) for Gemini CLI
 - Built for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
