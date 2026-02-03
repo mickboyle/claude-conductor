@@ -86,6 +86,21 @@ This interactive wizard:
 - Detects your existing tech stack (brownfield support)
 - Asks about your project, standards, and workflow
 - Generates configuration files in `conductor/`
+- Adds Conductor integration to `.claude/CLAUDE.md`
+
+**Setup questions:**
+
+| Question | Options |
+|----------|---------|
+| Project Name | Auto-detected or custom |
+| Project Vision | Free text description |
+| Project Type | Web app, API, CLI, Library, Mobile, Other |
+| Primary Language | TypeScript, JavaScript, Python, Go, Rust, Other |
+| Framework | Context-dependent (React, Next.js, FastAPI, etc.) |
+| Database | PostgreSQL, MySQL, SQLite, MongoDB, None, Other |
+| Testing Approach | TDD, Test-after, Integration only, Manual, Mixed |
+| Quality Gates | Standard (recommended), All gates, Minimal, Custom |
+| Design Philosophy | Multi-select: Simplicity, Security, Performance, DX, Accessibility, Mobile-first |
 
 ### 2. Create a Feature Track
 
