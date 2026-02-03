@@ -2,7 +2,7 @@
   "name": "claude-conductor-marketplace",
   "description": "Local marketplace for Claude Conductor plugin",
   "owner": {
-    "name": "Mick Davidson"
+    "name": "Mick Boyle"
   },
   "plugins": [
     {
