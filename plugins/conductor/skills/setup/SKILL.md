@@ -88,11 +88,34 @@ conductor/
 
 Use templates from the plugin's `templates/` directory, substituting placeholders with user answers.
 
-### 5. Auto-Commit
+### 5. Update CLAUDE.md
+
+Add Conductor integration instructions to the project's `.claude/CLAUDE.md`:
+
+1. Create `.claude/` directory if it doesn't exist
+2. Create or append to `CLAUDE.md`:
+
+```markdown
+## Conductor Integration
+
+This project uses Claude Conductor for structured feature development.
+
+When starting implementation work:
+1. Check for active track: `/conductor:status`
+2. If no track exists, create one: `/conductor:newTrack "description"`
+3. Follow the plan: `/conductor:implement`
+
+Use Conductor for non-trivial features to maintain structured
+development with proper specifications and progress tracking.
+```
+
+If `CLAUDE.md` already exists, append to the end (avoid duplicating if section already present).
+
+### 6. Auto-Commit
 
 If git is initialized:
 ```bash
-git add conductor/
+git add conductor/ .claude/CLAUDE.md
 git commit -m "Initialize Claude Conductor
 
 - Set up project configuration
@@ -102,7 +125,7 @@ git commit -m "Initialize Claude Conductor
 Co-Authored-By: Claude Code <noreply@anthropic.com>"
 ```
 
-### 6. Completion Message
+### 7. Completion Message
 
 ```
 Setup complete!
@@ -114,6 +137,8 @@ Created conductor/ with:
   ✓ tech-stack.md
   ✓ workflow.md
   ✓ tracks.md
+
+Updated .claude/CLAUDE.md with Conductor integration instructions.
 
 Next steps:
   1. Review generated files in conductor/

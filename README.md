@@ -249,20 +249,19 @@ Phase boundaries have **checkpoints** - explicit verification points where you c
 
 ## Integration with CLAUDE.md
 
-Add to your project's `.claude/CLAUDE.md` to remind Claude about Conductor:
+Running `/conductor:setup` automatically adds integration instructions to your project's `.claude/CLAUDE.md` file. This reminds Claude about Conductor when you start new sessions.
+
+If you need to add it manually (or to a different file), here's the snippet:
 
 ```markdown
 ## Conductor Integration
 
-This project uses Claude Conductor for feature development.
+This project uses Claude Conductor for structured feature development.
 
 When starting implementation work:
 1. Check for active track: /conductor:status
-2. If no track exists for this work, create one: /conductor:newTrack "description"
+2. If no track exists, create one: /conductor:newTrack "description"
 3. Follow the plan: /conductor:implement
-
-Use Conductor for non-trivial features to maintain structured
-development with proper specifications and progress tracking.
 ```
 
 ## Repository Structure
