@@ -1,0 +1,14 @@
+{
+  "name": "claude-conductor-marketplace",
+  "description": "Local marketplace for Claude Conductor plugin",
+  "owner": {
+    "name": "Mick Davidson"
+  },
+  "plugins": [
+    {
+      "name": "conductor",
+      "source": "./plugins/conductor",
+      "description": "Transform ephemeral AI sessions into structured, context-driven development with persistent Markdown artifacts"
+    }
+  ]
+}

@@ -22,18 +22,29 @@ Claude Conductor is a plugin for Claude Code that brings the structured developm
 ### Install
 
 ```bash
-# Clone the plugin
+# Clone the repository
 git clone https://github.com/your-username/claude-conductor.git
 
-# Install in Claude Code
-claude /plugin install ./claude-conductor
+# Add the local marketplace to Claude Code
+/plugin marketplace add ~/GitHub/claude-conductor
+
+# Install the conductor plugin from the marketplace
+/plugin install conductor@claude-conductor-marketplace
+```
+
+### Alternative: Development Mode
+
+For testing or development, start Claude with the plugin directory:
+
+```bash
+claude --plugin-dir ~/GitHub/claude-conductor/plugins/conductor
 ```
 
 ### Verify Installation
 
 ```bash
 # Check that Conductor is available
-claude /conductor:status
+/conductor:status
 ```
 
 You should see "Conductor not initialized" if the plugin is installed correctly.
@@ -41,7 +52,8 @@ You should see "Conductor not initialized" if the plugin is installed correctly.
 ### Uninstall
 
 ```bash
-claude /plugin uninstall claude-conductor
+/plugin uninstall conductor
+/plugin marketplace remove claude-conductor-marketplace
 ```
 
 ## Quick Start
@@ -210,21 +222,26 @@ Always use Conductor for non-trivial features to maintain
 structured development with proper specifications.
 ```
 
-## Plugin Structure
+## Repository Structure
 
 ```
-claude-conductor/
+claude-conductor/                    # Local marketplace
 ├── .claude-plugin/
-│   └── plugin.json          # Plugin manifest
-├── skills/                  # Skill definitions
-│   ├── setup/SKILL.md       # Project initialization
-│   ├── newTrack/SKILL.md    # Track creation
-│   ├── implement/SKILL.md   # Task execution
-│   ├── status/SKILL.md      # Progress display
-│   ├── review/SKILL.md      # Validation
-│   ├── revert/SKILL.md      # Rollback
-│   └── conductor-context/SKILL.md  # Context loading
-└── templates/               # Document templates
+│   └── marketplace.json             # Marketplace manifest
+├── plugins/
+│   └── conductor/                   # The Conductor plugin
+│       ├── .claude-plugin/
+│       │   └── plugin.json          # Plugin manifest
+│       ├── skills/                  # Skill definitions
+│       │   ├── setup/SKILL.md       # Project initialization
+│       │   ├── newTrack/SKILL.md    # Track creation
+│       │   ├── implement/SKILL.md   # Task execution
+│       │   ├── status/SKILL.md      # Progress display
+│       │   ├── review/SKILL.md      # Validation
+│       │   ├── revert/SKILL.md      # Rollback
+│       │   └── conductor-context/SKILL.md
+│       └── templates/               # Document templates
+└── README.md
 ```
 
 ## Configuration
