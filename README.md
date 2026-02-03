@@ -65,6 +65,22 @@ For testing without permanent installation:
 claude --plugin-dir /path/to/claude-conductor/plugins/conductor
 ```
 
+### Update
+
+To get the latest version:
+
+1. Pull the latest changes:
+   ```bash
+   cd /path/to/claude-conductor
+   git pull
+   ```
+
+2. Update the plugin in Claude Code:
+   ```
+   /plugin list
+   ```
+   Select `conductor`, then choose **"Update now"**.
+
 ### Uninstall
 
 ```
