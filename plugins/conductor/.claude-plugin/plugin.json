@@ -2,14 +2,17 @@
   "name": "conductor",
   "version": "1.0.0",
   "description": "Transform ephemeral AI sessions into structured, context-driven development with persistent Markdown artifacts",
-  "author": "Mick Davidson",
+  "author": {
+    "name": "Mick Davidson"
+  },
+  "license": "MIT",
   "skills": [
-    "setup",
-    "newTrack",
-    "implement",
-    "status",
-    "review",
-    "revert",
-    "conductor-context"
+    "./skills/setup/",
+    "./skills/newTrack/",
+    "./skills/implement/",
+    "./skills/status/",
+    "./skills/review/",
+    "./skills/revert/",
+    "./skills/conductor-context/"
   ]
 }
