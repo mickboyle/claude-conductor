@@ -4,7 +4,7 @@ Transform ephemeral AI sessions into structured, context-driven development with
 
 ## Overview
 
-Claude Conductor is a plugin for Claude Code that brings the structured development approach of Google's Conductor extension to your CLI workflow. It replaces ad-hoc AI sessions with:
+Claude Conductor is a plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) that brings structured development workflows to your CLI. Inspired by Google's Conductor extension for Gemini CLI, it replaces ad-hoc AI sessions with:
 
 - **Persistent specifications** that capture requirements before coding
 - **Phased execution plans** with tasks and subtasks
@@ -16,63 +16,79 @@ Claude Conductor is a plugin for Claude Code that brings the structured developm
 
 ### Prerequisites
 
-- [Claude Code](https://claude.com/claude-code) CLI installed and configured
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI installed and configured
 - Git installed (for track branching and rollback features)
 
-### Install
+### Step 1: Clone the Repository
 
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/claude-conductor.git
+git clone https://github.com/MickDavies/claude-conductor.git
+cd claude-conductor
+```
 
-# Add the local marketplace to Claude Code
-/plugin marketplace add ~/GitHub/claude-conductor
+### Step 2: Add the Marketplace
 
-# Install the conductor plugin from the marketplace
+Open Claude Code in any project, then run:
+
+```
+/plugin marketplace add ./.claude-plugin/marketplace.json
+```
+
+> **Note:** If you cloned to a different location, use the full path:
+> ```
+> /plugin marketplace add /path/to/claude-conductor/.claude-plugin/marketplace.json
+> ```
+
+### Step 3: Install the Plugin
+
+```
 /plugin install conductor@claude-conductor-marketplace
 ```
 
-### Alternative: Development Mode
-
-For testing or development, start Claude with the plugin directory:
-
-```bash
-claude --plugin-dir ~/GitHub/claude-conductor/plugins/conductor
-```
+Select **"Install for you (user scope)"** for global availability across all projects.
 
 ### Verify Installation
 
-```bash
-# Check that Conductor is available
+```
 /conductor:status
 ```
 
-You should see "Conductor not initialized" if the plugin is installed correctly.
+You should see "No Conductor setup detected" or similar - this confirms the plugin is working.
+
+### Alternative: Development Mode
+
+For testing without permanent installation:
+
+```bash
+claude --plugin-dir /path/to/claude-conductor/plugins/conductor
+```
 
 ### Uninstall
 
-```bash
+```
 /plugin uninstall conductor
 /plugin marketplace remove claude-conductor-marketplace
 ```
 
 ## Quick Start
 
-### 1. Initialize Conductor
+### 1. Initialize Conductor in Your Project
 
-```bash
-claude /conductor:setup
+Navigate to your project in Claude Code, then run:
+
+```
+/conductor:setup
 ```
 
-This runs an interactive wizard that:
+This interactive wizard:
 - Detects your existing tech stack (brownfield support)
 - Asks about your project, standards, and workflow
 - Generates configuration files in `conductor/`
 
 ### 2. Create a Feature Track
 
-```bash
-claude /conductor:newTrack "Add user authentication"
+```
+/conductor:newTrack "Add user authentication"
 ```
 
 This:
@@ -82,21 +98,21 @@ This:
 
 ### 3. Implement the Feature
 
-```bash
-claude /conductor:implement
+```
+/conductor:implement
 ```
 
 This:
 - Walks through tasks one by one
 - Updates checkboxes as work completes
 - Creates atomic commits per task
-- Pauses at phase checkpoints for approval
+- Pauses at phase checkpoints for your approval
 
 ### 4. Review and Ship
 
-```bash
-claude /conductor:review
-claude /conductor:status
+```
+/conductor:review
+/conductor:status
 ```
 
 ## Commands
@@ -104,29 +120,54 @@ claude /conductor:status
 | Command | Description |
 |---------|-------------|
 | `/conductor:setup` | Initialize Conductor for this project |
-| `/conductor:newTrack "desc"` | Create a new feature track |
+| `/conductor:newTrack "description"` | Create a new feature track |
 | `/conductor:implement` | Execute tasks from active track |
 | `/conductor:status` | Display progress and status |
 | `/conductor:review` | Validate against guidelines |
 | `/conductor:revert` | Rollback changes by task/phase/track |
 
+### Command Options
+
+**`/conductor:status`**
+- `--all` - Show all tracks
+- `--track ID` - Show specific track
+- `--summary` - Brief one-line summary
+
+**`/conductor:implement`**
+- `--task 2.3` - Jump to specific task
+- `--phase 3` - Start specific phase
+- `--status` - Show position without executing
+
+**`/conductor:revert`**
+- `--task 2.3` - Revert specific task
+- `--phase 2` - Revert entire phase
+- `--track` - Revert all track changes
+- `--last` - Revert last commit
+- `--dry-run` - Preview without changes
+
+**`/conductor:review`**
+- `--quick` - Fast check (skip deep analysis)
+- `--fix` - Attempt to auto-fix issues
+
 ## Generated Structure
 
-After setup, Conductor creates:
+After running `/conductor:setup`, Conductor creates:
 
 ```
-conductor/
-├── index.md                 # Navigation hub
-├── product.md               # Product definition
-├── product-guidelines.md    # Quality standards
-├── tech-stack.md            # Technology choices
-├── workflow.md              # Development process
-├── tracks.md                # Track registry
-└── tracks/
-    └── <track-id>/
-        ├── spec.md          # Feature specification
-        ├── plan.md          # Execution plan
-        └── metadata.json    # Progress state
+your-project/
+└── conductor/
+    ├── index.md                 # Navigation hub
+    ├── product.md               # Product definition
+    ├── product-guidelines.md    # Quality standards
+    ├── tech-stack.md            # Technology choices
+    ├── workflow.md              # Development process
+    ├── code_styleguides/        # Language-specific rules
+    ├── tracks.md                # Track registry
+    └── tracks/
+        └── <track-id>/
+            ├── spec.md          # Feature specification
+            ├── plan.md          # Execution plan
+            └── metadata.json    # Progress state
 ```
 
 ## Concepts
@@ -166,47 +207,47 @@ Subtask states:
 
 ### Checkpoints
 
-Phase boundaries have **checkpoints** - explicit verification points where you confirm the phase goals are met before continuing.
+Phase boundaries have **checkpoints** - explicit verification points where you confirm the phase goals are met before continuing. This prevents runaway implementation and ensures quality gates.
 
 ## Workflow Example
 
 ```
-1. User: /conductor:newTrack "Add dark mode"
+1. /conductor:newTrack "Add dark mode"
 
 2. Claude drafts spec, asks clarifying questions:
    - Should it respect OS preferences?
    - Where should the toggle be?
 
-3. User approves spec. Claude creates execution plan:
+3. You approve spec. Claude creates execution plan:
    - Phase 1: Setup theme infrastructure
    - Phase 2: Core implementation
    - Phase 3: Component integration
    - Phase 4: Testing
 
-4. User: /conductor:implement
+4. /conductor:implement
 
 5. Claude works through tasks:
    ✓ Task 1.1: Create theme config
    ✓ Task 1.2: Create ThemeContext
    → Checkpoint: "Theme infrastructure exists"
 
-6. User verifies Phase 1, approves continuation
+6. You verify Phase 1, approve continuation
 
 7. Process continues through all phases
 
-8. User: /conductor:review
+8. /conductor:review
    - Validates against all guidelines
    - Reports issues to fix
 
 9. If issues found, fix and re-review
-   - Or use /conductor:revert --task 3.2 to undo a task
+   - Or use /conductor:revert --task 3.2 to undo
 
 10. Track complete, ready for PR
 ```
 
 ## Integration with CLAUDE.md
 
-Add to your project's `.claude/CLAUDE.md`:
+Add to your project's `.claude/CLAUDE.md` to remind Claude about Conductor:
 
 ```markdown
 ## Conductor Integration
@@ -214,49 +255,59 @@ Add to your project's `.claude/CLAUDE.md`:
 This project uses Claude Conductor for feature development.
 
 When starting implementation work:
-1. Check for active track: `/conductor:status`
-2. If no track, create one: `/conductor:newTrack "description"`
-3. Follow the plan: `/conductor:implement`
+1. Check for active track: /conductor:status
+2. If no track exists for this work, create one: /conductor:newTrack "description"
+3. Follow the plan: /conductor:implement
 
-Always use Conductor for non-trivial features to maintain
-structured development with proper specifications.
+Use Conductor for non-trivial features to maintain structured
+development with proper specifications and progress tracking.
 ```
 
 ## Repository Structure
 
 ```
-claude-conductor/                    # Local marketplace
+claude-conductor/
 ├── .claude-plugin/
-│   └── marketplace.json             # Marketplace manifest
+│   └── marketplace.json           # Marketplace manifest
 ├── plugins/
-│   └── conductor/                   # The Conductor plugin
+│   └── conductor/                 # The Conductor plugin
 │       ├── .claude-plugin/
-│       │   └── plugin.json          # Plugin manifest
-│       ├── skills/                  # Skill definitions
-│       │   ├── setup/SKILL.md       # Project initialization
-│       │   ├── newTrack/SKILL.md    # Track creation
-│       │   ├── implement/SKILL.md   # Task execution
-│       │   ├── status/SKILL.md      # Progress display
-│       │   ├── review/SKILL.md      # Validation
-│       │   ├── revert/SKILL.md      # Rollback
+│       │   └── plugin.json        # Plugin manifest
+│       ├── skills/                # Skill definitions (7 skills)
+│       │   ├── setup/SKILL.md
+│       │   ├── newTrack/SKILL.md
+│       │   ├── implement/SKILL.md
+│       │   ├── status/SKILL.md
+│       │   ├── review/SKILL.md
+│       │   ├── revert/SKILL.md
 │       │   └── conductor-context/SKILL.md
-│       └── templates/               # Document templates
-└── README.md
+│       └── templates/             # Document templates (9 templates)
+├── README.md
+└── LICENSE
 ```
 
 ## Configuration
 
-### Templates
+### Customizing Templates
 
-Customize output by modifying templates in `templates/`:
-- `product.md.template`
-- `spec.md.template`
-- `plan.md.template`
-- etc.
+Templates control the generated documentation format. Find them in:
+```
+plugins/conductor/templates/
+```
 
-### Guidelines
+Available templates:
+- `product.md.template` - Product definition
+- `product-guidelines.md.template` - Quality standards
+- `tech-stack.md.template` - Technology choices
+- `workflow.md.template` - Development process
+- `tracks.md.template` - Track registry
+- `spec.md.template` - Feature specification
+- `plan.md.template` - Execution plan
+- `metadata.json.template` - Progress state
 
-Edit generated files in `conductor/`:
+### Customizing Guidelines
+
+After setup, edit generated files in your project's `conductor/` directory:
 - `product-guidelines.md` - Quality standards
 - `workflow.md` - Process requirements
 - `code_styleguides/` - Language-specific rules
@@ -274,16 +325,16 @@ Edit generated files in `conductor/`:
 ### Conductor's Solution
 
 - **Persistent artifacts** survive sessions
-- **Specifications** capture decisions
-- **Plans** break down complexity
-- **Guidelines** enforce standards
-- **Git integration** enables rollback
+- **Specifications** capture decisions before coding
+- **Plans** break down complexity into manageable tasks
+- **Guidelines** enforce consistent standards
+- **Git integration** enables precise rollback
 
 ## Comparison with Google Conductor
 
 | Feature | Google Conductor | Claude Conductor |
 |---------|------------------|------------------|
-| Platform | VS Code Extension | Claude Code CLI |
+| Platform | Gemini CLI Extension | Claude Code Plugin |
 | Artifacts | Markdown files | Markdown files |
 | Context | Workspace-based | Project-based |
 | Git Integration | Branch per track | Branch per track |
@@ -292,55 +343,60 @@ Edit generated files in `conductor/`:
 
 ## Troubleshooting
 
+### Commands Not Recognized
+
+**Problem:** `/conductor:setup` shows "Unknown skill"
+
+**Solutions:**
+1. Verify the plugin is installed: `/plugin list`
+2. Check the marketplace is added: Look for `claude-conductor-marketplace`
+3. Reinstall if needed:
+   ```
+   /plugin marketplace add /path/to/claude-conductor/.claude-plugin/marketplace.json
+   /plugin install conductor@claude-conductor-marketplace
+   ```
+
 ### "Conductor not initialized"
 
-**Problem:** Running commands shows "Conductor not initialized for this project."
+**Problem:** Commands fail with "Conductor not initialized for this project"
 
-**Solution:** Run `/conductor:setup` in your project directory to initialize Conductor.
+**Solution:** Run `/conductor:setup` in your project directory first.
 
 ### "No active track"
 
-**Problem:** `/conductor:implement` says there's no active track.
+**Problem:** `/conductor:implement` says there's no active track
 
-**Solution:** Either:
+**Solutions:**
 - Create a new track: `/conductor:newTrack "Feature description"`
 - Check existing tracks: `/conductor:status --all`
-
-### Plugin Not Found
-
-**Problem:** Commands like `/conductor:setup` aren't recognized.
-
-**Solution:**
-1. Verify installation: `claude /plugin list`
-2. Reinstall if needed: `claude /plugin install ./claude-conductor`
-3. Ensure you're in a directory where Claude Code can access the plugin
+- Set active track manually by creating `conductor/.active_track` with the track ID
 
 ### Git Errors During Track Creation
 
-**Problem:** Track creation fails with git errors.
+**Problem:** Track creation fails with git errors
 
-**Solution:**
+**Solutions:**
 - Ensure git is initialized: `git init`
-- Commit or stash uncommitted changes before creating a track
+- Commit or stash uncommitted changes first
 - Check you have permission to create branches
 
 ### Corrupted Track State
 
-**Problem:** Track metadata seems out of sync with actual progress.
+**Problem:** Track metadata seems out of sync with actual progress
 
-**Solution:**
+**Solutions:**
 1. Run `/conductor:status` to see current state
-2. If corrupted, the status command offers repair options
-3. As a last resort, manually edit `metadata.json` in the track directory
+2. Manually edit `conductor/tracks/<id>/metadata.json` to fix counters
+3. Update checkboxes in `plan.md` to match actual state
 
-### Checkpoint Verification Failed
+### Installation Path Issues (Windows)
 
-**Problem:** Phase checkpoint fails even though work is complete.
+**Problem:** Marketplace add fails on Windows
 
-**Solution:**
-- Review the checkpoint criteria in `plan.md`
-- Ensure all subtasks are marked `[x]` complete
-- If legitimately complete, choose "Checkpoint passed" to continue
+**Solution:** Use forward slashes or escape backslashes:
+```
+/plugin marketplace add C:/Users/name/GitHub/claude-conductor/.claude-plugin/marketplace.json
+```
 
 ## Contributing
 
@@ -353,4 +409,9 @@ Contributions welcome! Please:
 
 ## License
 
-MIT License - see LICENSE file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Inspired by [Google's Conductor extension](https://github.com/anthropics/anthropic-quickstarts) for Gemini CLI
+- Built for [Claude Code](https://docs.anthropic.com/en/docs/claude-code)

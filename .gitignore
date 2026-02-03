@@ -1,0 +1,22 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Test artifacts - ignore root conductor/ directory only
+# (this is generated when testing the plugin in this repo)
+/conductor/
+
+# PDF documentation (keep source, ignore generated)
+*.pdf
