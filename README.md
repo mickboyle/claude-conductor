@@ -210,16 +210,22 @@ Always use Conductor for non-trivial features to maintain
 structured development with proper specifications.
 ```
 
-## Agents
+## Plugin Structure
 
-Conductor uses specialized agents:
-
-| Agent | Purpose |
-|-------|---------|
-| `code-analyzer` | Detects existing tech stack |
-| `spec-writer` | Drafts specifications |
-| `plan-architect` | Creates execution plans |
-| `review-validator` | Validates against guidelines |
+```
+claude-conductor/
+├── .claude-plugin/
+│   └── plugin.json          # Plugin manifest
+├── skills/                  # Skill definitions
+│   ├── setup/SKILL.md       # Project initialization
+│   ├── newTrack/SKILL.md    # Track creation
+│   ├── implement/SKILL.md   # Task execution
+│   ├── status/SKILL.md      # Progress display
+│   ├── review/SKILL.md      # Validation
+│   ├── revert/SKILL.md      # Rollback
+│   └── conductor-context/SKILL.md  # Context loading
+└── templates/               # Document templates
+```
 
 ## Configuration
 
