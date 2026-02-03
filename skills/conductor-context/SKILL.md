@@ -1,6 +1,12 @@
-# Conductor Context Skill
+---
+name: conductor-context
+description: Auto-loads Conductor context for active tracks and project guidelines
+allowed-tools: Read, Glob
+---
 
-This skill automatically loads Conductor context for the current project when relevant.
+# /conductor:conductor-context
+
+Automatically loads Conductor context for the current project when relevant.
 
 ## Trigger
 

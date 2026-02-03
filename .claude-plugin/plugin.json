@@ -1,67 +1,15 @@
 {
-  "name": "claude-conductor",
+  "name": "conductor",
   "version": "1.0.0",
   "description": "Transform ephemeral AI sessions into structured, context-driven development with persistent Markdown artifacts",
   "author": "Mick Davidson",
-  "commands": [
-    {
-      "name": "conductor:setup",
-      "description": "Initialize Conductor for this project with interactive setup",
-      "file": "commands/setup.md"
-    },
-    {
-      "name": "conductor:newTrack",
-      "description": "Create a new feature track with spec and execution plan",
-      "file": "commands/newTrack.md"
-    },
-    {
-      "name": "conductor:implement",
-      "description": "Execute tasks from the active track's plan",
-      "file": "commands/implement.md"
-    },
-    {
-      "name": "conductor:status",
-      "description": "Display current track progress and project status",
-      "file": "commands/status.md"
-    },
-    {
-      "name": "conductor:review",
-      "description": "Validate implementation against all guidelines",
-      "file": "commands/review.md"
-    },
-    {
-      "name": "conductor:revert",
-      "description": "Rollback changes by track, phase, or task",
-      "file": "commands/revert.md"
-    }
-  ],
-  "agents": [
-    {
-      "name": "spec-writer",
-      "description": "Drafts feature specifications from user requirements",
-      "file": "agents/spec-writer.md"
-    },
-    {
-      "name": "plan-architect",
-      "description": "Creates phased execution plans with tasks and subtasks",
-      "file": "agents/plan-architect.md"
-    },
-    {
-      "name": "code-analyzer",
-      "description": "Analyzes existing codebase for brownfield detection",
-      "file": "agents/code-analyzer.md"
-    },
-    {
-      "name": "review-validator",
-      "description": "Validates code against project guidelines",
-      "file": "agents/review-validator.md"
-    }
-  ],
   "skills": [
-    {
-      "name": "conductor-context",
-      "description": "Auto-loads conductor context for the current project",
-      "directory": "skills/conductor-context"
-    }
+    "setup",
+    "newTrack",
+    "implement",
+    "status",
+    "review",
+    "revert",
+    "conductor-context"
   ]
 }
